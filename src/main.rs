@@ -1,5 +1,5 @@
 use graphproject::algorithm::graph::Graph;
-
+use graphproject::fileread::read;
 struct User{
     name:String,
     id:i32,
@@ -22,9 +22,10 @@ let mut graph = Graph::new();
     // user database
 
 
+    read::file_read()
 
 
 
-    println!("{:?}",graph);
+   // println!("{:?}",graph);
 
 }

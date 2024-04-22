@@ -21,7 +21,7 @@ where T: std::cmp::Eq+std::hash::Hash+Clone{
     }
 
 
-    pub fn add_vertex(&mut self,vertex: User){
+    pub fn add_vertex(&mut self,vertex: T){
 
         // firstly entry(vertex) gets called ,if the entry is vacant (ie the vertext doesnt exists in the map)
         // or insert_ the value returned bty Vec::new()
@@ -37,6 +37,14 @@ where T: std::cmp::Eq+std::hash::Hash+Clone{
         }else{
             self.adjacent_list.insert(src.clone(),vec![dst.clone()]);
         }
-        self.add_vertex(dst);
+        self.add_vertex(dst.clone());
+
+
+        if let Some(neighbors) =self.adjacent_list.get_mut(&dst){
+            neighbors.push(src.clone())
+        }else{
+            self.adjacent_list.insert(dst.clone(),vec![src.clone()]);
+        }
+        self.add_vertex(src.clone());
     }
 }
